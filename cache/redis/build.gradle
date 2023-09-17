@@ -1,0 +1,5 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    testImplementation 'com.github.kstyrc:embedded-redis:0.6'
+}

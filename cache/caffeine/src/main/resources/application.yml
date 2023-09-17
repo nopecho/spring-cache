@@ -1,0 +1,18 @@
+server:
+  port: 10009
+
+cache:
+  # default time unit: seconds
+  caffeine:
+    - spec:
+        name: test
+        max-size: 10000
+        expire-time-after-write: 1800
+    - spec:
+        name: test2
+        max-size: 1
+        expire-time-after-write: 10
+    - spec:
+        name: test3
+        max-size: 1
+        expire-time-after-write: 100
