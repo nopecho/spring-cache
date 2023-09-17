@@ -1,0 +1,34 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      username:
+      password:
+      ssl:
+        enabled: false
+
+
+cache: # default time unit: seconds
+  caffeine:
+    - spec:
+        name: localTest
+        max-size: 10000
+        expire-time-after-write: 1800
+    - spec:
+        name: localTest2
+        max-size: 1
+        expire-time-after-write: 10
+    - spec:
+        name: localTest3
+        max-size: 1
+        expire-time-after-write: 100
+  redis:
+    - spec:
+        name: redisCache
+        ttl: 1000
+    - spec:
+        name: redisCache2
+        ttl: 10000
+    - spec:
+        name: redisCache3

@@ -4,4 +4,7 @@ include 'cache:caffeine'
 findProject(':cache:caffeine')?.name = 'caffeine'
 include 'cache:redis'
 findProject(':cache:redis')?.name = 'redis'
+include 'sample'
+include 'cache:core'
+findProject(':cache:core')?.name = 'core'
 

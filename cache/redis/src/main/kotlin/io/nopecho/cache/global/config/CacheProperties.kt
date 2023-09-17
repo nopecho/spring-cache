@@ -1,8 +1,8 @@
-package io.nopecho.cache.local.config
+package io.nopecho.cache.global.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties(prefix = "cache")
 class CacheProperties(
-    val caffeine: List<CacheCaffeineProperties> = listOf()
+    val redis: List<CacheRedisProperties> = listOf()
 )

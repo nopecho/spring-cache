@@ -1,0 +1,4 @@
+dependencies {
+    api(project(':cache:caffeine'))
+    api(project(':cache:redis'))
+}
