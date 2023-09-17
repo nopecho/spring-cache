@@ -1,8 +1,11 @@
 package io.nopecho.cache.global.config
 
 import io.nopecho.cache.global.config.CacheRedisSpecProperties.Companion.DEFAULT_TTL
+import org.springframework.cache.CacheManager
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.cache.RedisCacheConfiguration
+import org.springframework.data.redis.cache.RedisCacheManager
 import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializationContext
@@ -15,11 +18,14 @@ class RedisCacheConfig(
     private val redisConnection: RedisConnectionFactory
 ) {
 
-    fun getRedisConnection(): RedisConnectionFactory {
-        return redisConnection
+    @Bean
+    fun globalCacheManager(): CacheManager {
+        return RedisCacheManager.builder(redisConnection)
+            .withInitialCacheConfigurations(getCacheConfigurations())
+            .build()
     }
 
-    fun getCacheConfigurations(): Map<String, RedisCacheConfiguration> {
+    private fun getCacheConfigurations(): Map<String, RedisCacheConfiguration> {
         val defaultConfig = RedisCacheConfiguration.defaultCacheConfig()
             .entryTtl(Duration.ofSeconds(DEFAULT_TTL))
             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer()))
